@@ -71,11 +71,11 @@
 //#############################################################################
 // Server
 
-import { Server } from "./server";
-import { Game } from "./game";
-import { Map } from "./map";
-import { Tile } from "./tile";
-import { Player } from "./player";
+import { Server } from "./modules/server";
+import { Game } from "./modules/game";
+import { Map } from "./modules/map";
+import { Tile } from "./modules/tile";
+import { Player } from "./modules/player";
 
 // let player = new Player("world");
 // console.log(player.getName());

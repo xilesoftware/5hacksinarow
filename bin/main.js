@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var server_1 = require("./server");
+var server_1 = require("./modules/server");
 var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
