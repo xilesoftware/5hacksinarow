@@ -109,24 +109,24 @@ io.on('connection', function(socket: any){
             var game = server.createGame();
             // Send map to all players
             io.emit('update map', game.map);
+            console.log("Update map for all players");
         }
     }
 
-    // startGame(socket, usersConnected);
+    //socket.on('chat message', function(msg: string){
+    //    console.log('message: ' + msg);
+    //    io.emit('chat message', msg);
+    //});
 
-    socket.on('chat message', function(msg: string){
-        console.log('message: ' + msg);
-        io.emit('chat message', msg);
-    });
-
-    socket.on('tile selection', function(msg: string){
+    socket.on('tile selection', function(json: string){
         console.log("User: "+socket.id);
-        console.log(msg);
+        console.log(json);
+
+        game.tileSelection(socket, json);
 
         //map[msg.x][msg.y] = 1;
 
-        // console.log('client made tile seleciton: ' + msg);
-        //io.emit('update map', map);
+        io.emit('update map', game.map);
     });
 
     socket.on('disconnect', function(){

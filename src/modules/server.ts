@@ -4,7 +4,7 @@ import { Game } from "./game";
 export class Server {
 
     name: string; // In case we have multiple servers running
-    players: Player[]; // This variable will hold all players connected to the game
+    players: Player[]; // This variable will hold all players connected to the server
     games: Game[]; // This variable will hold all games that is running
 
     constructor(name: string) {
@@ -38,7 +38,7 @@ export class Server {
 
     createGame() {
         // For now I will generate the game here
-        let newGame = new Game("Game #1", "");
+        let newGame = new Game("Game #1", "", this.players);
         this.games.push(newGame);
 
         return newGame;
