@@ -2,3 +2,6 @@
 node_modules
 bin
 npm-debug.log
+\.bin/modules/
+
+\.bin/

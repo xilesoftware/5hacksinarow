@@ -84,6 +84,8 @@ var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
+const BASEPATH = __dirname.substring(0, __dirname.length - 3);
+
 //var map = [];
 var server = new Server("Server #1");
 
@@ -92,7 +94,7 @@ app.get('/', function(req: any, res: any){
 });
 
 app.get('/map', function(req: any, res: any){
-    res.sendFile(__dirname + '/map.html');
+    res.sendFile(BASEPATH + '/src/views/map.html');
 });
 
 io.on('connection', function(socket: any){
