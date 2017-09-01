@@ -1,12 +1,20 @@
+import { Tile } from "./tile";
+
 export class Map {
 
-    name: string;
+    map: Tile[][]; // This is a multi dimentional array of Tiles
 
-    constructor(name: string) {
-        this.name = name;
-    }
+    constructor(mapSize: any) {
+        console.log("Generating map " + mapSize.x + "x" + mapSize.y);
+        
+        this.map = [];
 
-    getName() {
-        return this.name;
+        for(var x = 0; x < mapSize.x; x++){
+            this.map[x] = [];
+
+            for(var y = 0; y < mapSize.y; y++){
+                this.map[x][y] = new Tile();
+            }
+        }
     }
 }

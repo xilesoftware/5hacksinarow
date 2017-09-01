@@ -96,10 +96,19 @@ app.get('/map', function(req: any, res: any){
 });
 
 io.on('connection', function(socket: any){
-    
+
     server.playerConnect(socket);
 
-    console.log("There are now " + server.playerCount() + " connected.");
+    console.log("There are now " + server.playerCount() + " player(s) connected.");
+
+    if(server.playerCount() >= 2){
+        // Only start a new game if there is none.
+        if(server.games.length == 0){
+            var game = server.createGame();
+            // Send map to all players
+            io.emit('update map', game.map);
+        }
+    }
 
     // startGame(socket, usersConnected);
 
@@ -118,8 +127,7 @@ io.on('connection', function(socket: any){
         //io.emit('update map', map);
     });
 
-    socket.on('disconnect', function(socket: any){
-        console.log(socket.id);
+    socket.on('disconnect', function(){
         server.playerDisconnect(socket);
     });
 });

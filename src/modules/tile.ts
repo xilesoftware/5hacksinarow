@@ -1,12 +1,14 @@
 export class Tile {
 
-    name: string;
+    walkable: boolean;
 
-    constructor(name: string) {
-        this.name = name;
-    }
-
-    getName() {
-        return this.name;
+    constructor() {
+        let randomInt = Math.floor(Math.random() * (100 - 0 + 1)) + 0;
+        // console.log(randomInt);
+        if(randomInt < 90){
+            this.walkable = true;
+        }else{
+            this.walkable = false;
+        }
     }
 }
