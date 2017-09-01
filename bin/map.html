@@ -1,0 +1,81 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <div id="map"></div>
+        <script src="/socket.io/socket.io.js"></script>
+        <script>
+            window.onload = function(){
+
+                var socket = io();
+                let gameRunning = false;
+                let map = [];
+
+                function startGame(){
+                    if(gameRunning === true){
+                        document.getElementById("map").innerHTML = "STARTING GAME";
+                    }else{
+                        document.getElementById("map").innerHTML = "GAME WAITING FOR HOST";
+                    }
+                }
+
+                socket.on('start game', function(msg){
+                    if(gameRunning === true){
+                        console.log("Game is already running");
+                    }else{
+                        console.log("Game started");
+                        gameRunning = true;
+                        map = msg;
+                        startGame();
+                        renderMap("map", map);
+                    }
+                });
+
+                socket.on('update map', function(msg){
+                    renderMap("map", msg);
+                });
+
+                startGame();
+
+                function renderMap(mapId, map){
+                    let mapBox = document.getElementById(mapId);
+                    let newContent = '';
+                    newContent += '<table id="map-grid" style="border:1px solid #000;">';
+
+                    for(var x = 0; x < map.length; x++){
+                        newContent += '<tr>';
+
+                        for(var y = 0; y < map[x].length; y++){
+                            if(map[x][y] === 1){
+                                color = '000';
+                            }else{
+                                color = 'ddd';
+                            }
+
+                            newContent += '<td x="'+x+'" y="'+y+'" style="background:#'+color+';width:20px;height:20px;" title="'+x+'x'+y+'">';
+                        }
+
+                        newContent += '</tr>';
+                    }
+
+                    newContent += '</table>';
+                    mapBox.innerHTML = newContent;
+                }
+
+                function eventFunction(event) {
+                    console.log(event);
+                    
+                    if(event.target.attributes.x !== undefined && event.target.attributes.y !== undefined){
+                        console.log(event.target.attributes.x.value);
+                        console.log(event.target.attributes.y.value);
+
+                        socket.emit('tile selection', {x: event.target.attributes.x.value, y: event.target.attributes.y.value });
+                    }
+                }
+                var test = document.getElementById("map");
+                test.addEventListener("click", eventFunction, false);
+            };
+        </script>
+    </body>
+</html>
