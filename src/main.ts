@@ -120,8 +120,8 @@ io.on('connection', function(socket: any){
 
     socket.on('tile selection', function(json: string){
         console.log("User: "+socket.id);
-        console.log(json);
-
+        
+        console.log(game);
         game.tileSelection(socket, json);
 
         //map[msg.x][msg.y] = 1;

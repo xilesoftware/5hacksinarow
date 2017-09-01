@@ -47,7 +47,7 @@
                         newContent += '<tr>';
 
                         for(var y = 0; y < json.map[x].length; y++){
-                            if(json.map[x][y]['walkable'] == false){
+                            if(json.map[x][y]['blocked'] == true){
                                 color = '000';
                             }else{
                                 color = 'ddd';

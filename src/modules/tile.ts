@@ -1,14 +1,14 @@
 export class Tile {
 
-    walkable: boolean;
+    blocked: boolean;
 
     constructor() {
         let randomInt = Math.floor(Math.random() * (100 - 0 + 1)) + 0;
         // console.log(randomInt);
         if(randomInt < 90){
-            this.walkable = true;
+            this.blocked = false;
         }else{
-            this.walkable = false;
+            this.blocked = true;
         }
     }
 }

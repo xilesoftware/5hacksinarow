@@ -32,14 +32,12 @@ export class Game {
 
     tileSelection(socket: any, json: any) {
 
-        console.log(this.currentPlayersTurn);
+        console.log("Current players turn: " + this.currentPlayersTurn);
         this.players.forEach((player, index) => {
             if(socket.id == player.id && this.currentPlayersTurn == index){
                 // This is a correct move
                 console.log(socket.id + " checked a tile.");
                 console.log(json);
-            }else{
-                console.log("It is not your turn");
             }
         });
     }
