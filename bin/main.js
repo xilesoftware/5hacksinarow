@@ -4,12 +4,13 @@ var server_1 = require("./modules/server");
 var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
+var BASEPATH = __dirname.substring(0, __dirname.length - 3);
 var server = new server_1.Server("Server #1");
 app.get('/', function (req, res) {
     res.sendFile(__dirname + '/index.html');
 });
 app.get('/map', function (req, res) {
-    res.sendFile(__dirname + '/map.html');
+    res.sendFile(BASEPATH + '/src/views/map.html');
 });
 io.on('connection', function (socket) {
     server.playerConnect(socket);
